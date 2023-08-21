@@ -1,4 +1,4 @@
-package com.example.openfeign.summoner.infra;
+package com.example.openfeign.summoner.infra.riotDto;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;

@@ -1,12 +1,13 @@
 package com.example.openfeign.summoner.infra;
 
+import com.example.openfeign.summoner.infra.client.RiotClient;
+import com.example.openfeign.summoner.infra.riotDto.SummonerQueryResponse;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import feign.FeignException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
@@ -21,7 +22,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-@EnableFeignClients(clients = SummonerClient.class)
 @WireMockTest(httpPort = 8080)
 @TestPropertySource(properties = {
         "riot.api.url=http://localhost:8080",
@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 })
 class WireMockSummonerClientTest {
     @Autowired
-    private SummonerClient summonerClient;
+    private RiotClient riotClient;
 
     @Test
     @DisplayName("존재하지 않는 소환사명으로 정보를 가져오려 했을 때")
@@ -51,7 +51,7 @@ class WireMockSummonerClientTest {
                                 }
                                   """)));
 
-        Optional<SummonerQueryResponse> responseOpt = summonerClient.getSummoner(givenNotExistsSummonerName);
+        Optional<SummonerQueryResponse> responseOpt = riotClient.getSummoner(givenNotExistsSummonerName);
 
         assertThat(responseOpt).isEmpty();
     }
@@ -76,7 +76,7 @@ class WireMockSummonerClientTest {
                                   }
                                   """)));
 
-        assertThrows(FeignException.Forbidden.class , ()-> summonerClient.getSummoner(givenAnySummonerName));
+        assertThrows(FeignException.Forbidden.class , ()-> riotClient.getSummoner(givenAnySummonerName));
     }
 
     private Function<String, String> encodingUTF_8() {
