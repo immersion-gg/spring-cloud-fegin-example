@@ -1,5 +1,6 @@
 package com.example.openfeign.summoner.infra;
 
+import com.example.openfeign.summoner.infra.riotDto.SummonerQueryResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
