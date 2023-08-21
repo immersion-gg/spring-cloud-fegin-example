@@ -1,7 +1,11 @@
 riot:
   api:
     url: https://kr.api.riotgames.com
-    key: ${RIOT_API_KEY}
+    key: RGAPI-8f81a5fd-f3f8-49b7-8db2-2ea0c30227d0
+kakao:
+  api:
+    url: https://dapi.kakao.com
+    key: KakaoAK a104075bd40af6bc7240a5053370e10f
 
 logging:
   level:
