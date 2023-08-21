@@ -1,7 +1,6 @@
 package com.example.openfeign.config;
 
-import com.example.openfeign.OpenfeignApplication;
-import com.example.openfeign.summoner.infra.client.RiotClient;
+import com.example.openfeign.summoner.infra.client.LocalSearchClient;
 import feign.Logger;
 import feign.RequestInterceptor;
 import jakarta.el.PropertyNotFoundException;
@@ -11,12 +10,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
-
-public class RiotFeignConfiguration {
+public class KakaoFeignConfiguration {
     private final String apiKey;
 
-    public RiotFeignConfiguration(@Value("${riot.api.key}") String apiKey) {
-        if (!StringUtils.startsWithIgnoreCase(apiKey, "RGAPI")) {
+    public KakaoFeignConfiguration(@Value("${kakao.api.key}") String apiKey) {
+        if (!StringUtils.startsWithIgnoreCase(apiKey, "KakaoAK")) {
             throw new PropertyNotFoundException("API키를 추가해주세용");
         }
 
@@ -24,12 +22,12 @@ public class RiotFeignConfiguration {
     }
 
     @Bean
-    Logger.Level feignLoggerLevel() {
+    Logger.Level kakaoFeignLoggerLevel() {
         return Logger.Level.FULL;
     }
 
     @Bean
-    RequestInterceptor riotRequestInterceptor() {
-        return requestTemplate -> requestTemplate.header("X-Riot-Token", apiKey);
+    RequestInterceptor kakaoRequestInterceptor() {
+        return requestTemplate -> requestTemplate.header("Authorization", apiKey);
     }
 }
