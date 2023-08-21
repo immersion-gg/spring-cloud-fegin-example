@@ -1,7 +1,7 @@
 riot:
   api:
     url: https://kr.api.riotgames.com
-    key: ${RIOT_API_KEY}
+    key: RGAPI-8f81a5fd-f3f8-49b7-8db2-2ea0c30227d0
 
 logging:
   level:
