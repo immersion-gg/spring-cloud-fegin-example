@@ -8,6 +8,6 @@ public record DocumentDto(
         @JsonProperty("x")
         String x,
         @JsonProperty("y")
-        String y
+        String y//
 ) {
 }
